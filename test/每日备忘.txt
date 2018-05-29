@@ -1,0 +1,195 @@
+
+--------------------------每周的日志：---------------------------------
+
+11.27-12.1
+	公众号首借，网络加载慢导致的用户可以借款
+	app改版功能更新到赤兔宝最新以及使用eslint之后的语法报错修改
+		1、下载链接、审核拒绝的用户，引流到51花贷款超市
+		2、app流程中身份认证bug、登录页面bug、公众号首借bug修复
+		3、app的构建时，压缩代码、token为空的安全判断
+https://m.xiashu.cc/69921/tc_79_339.html
+
+12.4-12.8
+	审核拒绝的返回，改成回到loan页面，在header.vue中改
+	还有一个就是签约中的综合费用：现在是两个字段相加，后面改成一个字段值
+	审核拒绝页面，background不对，要改一下
+
+	12.4  12.5   12.6多屏适配完成到6号
+	12.6公共css基础样式
+	vux样式重置
+	12.7信用评分不足用户引流到51花
+	12.8 css公共样式整理
+
+12.11-12.15
+	搭建react-native环境，了解react
+	赤兔宝app添加51花的导流统计功能
+	react.js的学习（从组件、生命周期什么的直接了解）
+	react-native的学习（同上，能写出点东西就行），
+		然后还要学习与原生开发相结合的东西，
+		内容不可能全都用rn，还要考虑放h5的内容
+		和后台的交互，ajax什么的
+12.18-12.22
+	react.js的学习、
+	了解bootstrap及其js插件、animate.css
+	币交易环境搭建，熟悉代码
+
+
+--------------接下来的事：--------------
+
+
+云。。：一个pc端的网站，要改皮肤、样式或者还会加点新功能什么的
+
+app
+
+电商
+
+
+-------------------------------	
+	
+flexible.js插件：
+	1、dpr处理方式：
+		ios下，dpr为2或者3的，用的2倍的方案，其余的，用的1倍的方案
+		andriod下，不论dpr值，全部用的1倍的方案。
+	2、监听：
+		addEventListener（）,间歇监听屏幕尺寸和dpr值
+
+	3、字体字号：
+		 doc.body.style.fontSize = 12 * dpr + 'px';
+		根据dpr值，分别设定font-size值为12px、24px、36px
+	4、像素px---rem
+		通篇用rem的单位，按照750的ui图来写 实际尺寸/75 * 1rem，写的页面在所有屏幕上看起来一样
+
+
+
+---------------------------11.28这个星期要做的事：--------------------------------
+
+	1、app改版中eslint语法报错修改，代码也要更新到最新（最近改了不少东西，）
+
+		(ok)1、guide页面的下载链接以及下载链接为空的提示（暂不支持下载）
+		(ok)2、app流程中身份认证bug（渠道改成从缓存中拿）
+		(ok)3、app的构建时，压缩代码
+		(ok)4、token为空的判断
+		(ok)5、登录页面bug(有v-model和v-bind:value并存)
+		(ok)6、审核拒绝的用户，引流到51花贷款超市
+		(ok)7、公众号首借bug(首页加载产品延后，先判断是不是首借用户，避免网络慢用户能借款）
+		(ok)8、语法问题还剩下views/index、views/my两个文件夹下的.vue文件
+
+		还有最新的一个：
+		1、信用评分不足的用户的引流问题（app/loan页面，reviewFail页面要改下外壳的方法goOutside）
+		2、赤兔宝app添加51花的导流统计功能
+
+	---提交的文案就是  .vue文件的语法错误和更新到线上最新的代码
+
+	#### app里面为什么要单独写消息通知页面？(消息通知的外壳方法在app.vue中，好像可以不用在app中写消息通知的页面) ####
+
+
+	2、app、90钱包..。多个app使用单独文件夹下的代码（尽量不要全部引用，只有小部分js改动的话，引js）
+	（ok）3、getUserInfo这个接口可以写成一个公共方法来引用（就不用页面每次调用都要写一遍了）
+	4、less屏幕适配（大问题，不会啊），
+	使用插件lib-flexible（0.3.2版本）解决
+
+        像素比dpr：window.devicePixelRatio
+	var dpr = windowdevicePixelRatio || 1;
+
+	一般情况下的rem基准值：
+	rem = document.documentElement.clientWidth * dpr / 10
+
+	通过改变fot-size的值来控制rem的大小
+	js的方式是通过计算公式，然后再通过 scale再进行缩放。
+	设置viewport 进行缩放，达到高清效果
+
+	
+--------------------------sublime起本地服务：---------------------------------
+
+tools--sublimeServer--startSublimeServer(打开一个本地服务)
+到某个.html页面，右击“view in sublimeServer”,就可以在本地启动一个服务，(localhost:8080/...),手机也可以访问。
+
+---------------------------# Jenkins------------------------------
+
+##编译： 选piperline,Build with Parameters,前后台选合并完的分支，admin和cuishou选择默认的         master,然后点击“开始构建”，编译一个环境。
+
+##发布： 选test-deploy，Build with Parameters,
+	project选择刚刚构建的环境“piperline”,
+	docker_name选择要打到的环境，如：sit（自己用的）,uat,test（测试人员用的）等等
+	build_selector默认选择“latest successful build”(上面打包的最新的，但是如果我构建的上        面还有别人构建好的，那么就要选择倒数第二个“specific build”,然后会出现一个build         number要填写，填写上面自己打包的项目编号，)	然后，点击“开始构建”，发布一个环境。
+
+
+
+------
+zoo-master-web   master分支的代码提交会自动构建，复制地址 上线
+------------------------------------（查看日志）-----------------------------
+
+# SecureCRTPortable的使用（查看日志）
+
+su - app
+ls
+cd tomcat_web
+ls
+cd logs
+ls
+tail -f catalina.out(这个地方，输cata时按tab键可以自动补全名称。)
+
+----------------------------------------------------------------------
+
+//h5页面调用app方法：
+
+clientapi://方法名？p={传递给app端的参数（JSON.stingify(obj)）}&h5页面对应改的方法名(window.方法名)&encry=base64||encry=aes||...
+
+
+input[type='checkbox']:checked + i{color:red;}
+这个的意思是当复选框选中时，把当前的复选框 和后面的<i>标签都执行红色字体。
+
+---------------------------------剩下的事：------------------------
+
+在created中
+	1.查渠道，是wechat入口的，initWeChat(),
+
+	2.判断微信相机是否启动失败，失败，重启一次，
+
+	3.调getUserInfo（取loanNo,loanProId,uid）,成功后再调渠道接口（）
+		是微信渠道的，isWeixinSfz,isWeixinLian都为true
+		调upPic接口，微信入口什么也不做
+
+点击身份认证时，根据isWeiXinSfz的值， 调微信相机getWXCamera1()
+	wx.ready--wx.chooseImage -- window._wxjs_is_wkwebview(wx.getLocalImgData)
+				 -- else(wx.uploadImage)
+
+-------------------------------------------------------------------
+ 
+电信用户忘记密码 - 发送验证码页面 （输入短信验证码，下一步）
+电信用户提交验证码  （输入短信验证码，下一步）
+重置密码页面  （手机号，所属运营商，短信验证码，新密码，下一步）
+
+
+
+------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

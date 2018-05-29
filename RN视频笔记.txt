@@ -1,0 +1,65 @@
+一、全局变量的设置：
+global.a = 1   相当于以前写的window.a = 1
+
+一般情况下，RN都是用export default{}来定义全局变量的，然后在用到的模块中引入这个文件并命名，再使用，如：
+	constant.js文件
+
+	export default {
+		name: "jyy"	
+		sex: "girl"
+	}
+	使用时，先 import Cons from './constant.js';
+	<Text>名字：{Cons.name}</Text>
+
+另一种定义方式：
+	constant.js文件：
+
+	global.Constant {
+		name: "jyy"	
+		sex: "girl"
+	}
+	使用时，先在入口文件中引入（调用） import './constant.js';
+	<Text>名字：{Constant.name}</Text>
+	
+
+二、React Native 中文社区的一篇文章：ES5 和 ES6写法对照表
+
+es5是不绑定this的，es6是绑定的
+如果是自定义的函数：使用箭头函数的形式，就不用再去单独绑定了
+
+调用函数test时，用onPress = this.Test
+Test = () => {this.state.变量1}
+
+调用函数时，要传递参数，用onPress = {() => this.Test('child')}
+Test = (params) => {this.state.变量2}
+
+
+
+三、使用第三方组件时，如果，需要哪个地方需要小改动一下的，点击“fork”，生成自己的组件版本，然后，npm install git地址 --save,这个地方为什么使用git地址而不是组件名称呢？用组件名称的话，下载下来的仍然是原先的版本，不是修改过后的版本。
+
+四、fetch api
+
+RN官网有推荐使用fetch的方式 ，而不是用传统的XMLHttpRequest方式，fetch算是封装好了的，类似于ajax、axios
+ Fetch是一个异步请求，会返回一个Promise。
+
+fetch('https://mywebsite.com/endpoint/', {
+  method: 'POST',
+  headers: {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    firstParam: 'yourValue',
+    secondParam: 'yourOtherValue',
+  })
+}).then().then().catch()
+
+如果是表单的提交，换一下Content-Type
+fetch('https://mywebsite.com/endpoint/', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/x-www-form-urlencoded',
+  },
+  body: 'key1=value1&key2=value2'
+})
+
