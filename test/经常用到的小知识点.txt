@@ -1,0 +1,10 @@
+JSON.parse()	将字符串解析成对象
+JSON.stringify()将对象解析成字符串
+
+qs.parse()	将URL解析成对象
+qs.stringify()  将对象解析成URL
+
+-------------------------------
+
+git checkout 分支     切换分支
+git checkout 文件名   相当于revert一个文件
