@@ -1,0 +1,14 @@
+.*
+!.babelrc
+!.gitignore
+
+# macOs
+.DS_Store
+Icon
+
+# Directory
+/build
+/log
+/node_modules
+/out
+/output
