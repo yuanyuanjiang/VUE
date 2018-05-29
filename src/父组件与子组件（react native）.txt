@@ -1,0 +1,125 @@
+react 父组件调用子组件的方法：5837  6630
+	
+  1.父子组件通过props来传递数据
+	
+	父向子传值：子组件通过“this.props.变量”来获取数据
+	子向父传值：子组件通过“this.props.方法名()”这样一个父组件的回调函数来向父组件传值
+	兄弟传值：
+
+  2.父组件直接调用子组件的方法（用父组件来控制子组件）
+
+	子组件写一个ref = {(refs) => {this.child = refs}}
+	此时的 this.child 就代表了子组件
+	调用子组件的方法/变量，this.child.方法名()/this.child.state.变量
+
+   或者：子组件写一个ref = "child"
+	 此时的 this.refs.son 就代表了子组件
+	调用子组件的方法/变量，this.refs.son.方法名()/this.refs.son.state.变量
+
+
+  3.子组件调用父组件的方法
+
+  this.props.变量 / this.props.方法名()  这两个是子组件调用父组件的变量/方法
+
+
+  兄弟组件之间的通信（用通知）
+	A向B
+	A组件写一个：DeviceEventEmitter.emit('makeMoney', 100)
+
+	B组件添加监听：
+	this.listener = DeviceEventEmitter.addListener("makeMoney",(money)=>{this.setState({money: money})}) 
+
+	销毁监听  
+	this.listener.remove()  
+
+------------------------------  
+通知的用法(用于组件间相互通信) ：
+  第一步，引入DeviceEventEmitter
+
+  第二步，添加DeviceEventEmitter(addListener)  在componentDidMount中
+
+  第三步，移除DeviceEventEmitter （remove）     在componentWillUnmount中
+
+  第四步，在任意页面发起通知，即可唤起：DeviceEventEmitter.emit()
+
+要注意移除，还有头文件的引入。
+-------------------------------
+
+
+组件的生命周期
+	  			getDefaultProps
+
+	  			getInitialState
+
+	 			componentWillMount
+
+	      			     render
+
+				componentDidMount
+
+属性props改变  			     运行中   			卸载Unmount
+
+	   			状态state改变
+
+componentWillReceiveProps	shouldCOmponentUpdate		componentWillUnmount
+
+				componentWillUpdate
+				
+				      render
+
+				componentDidUpdate
+
+
+
+
+
+
+-------------------------------------------
+生命周期
+方法名：                   作用
+
+constructor 		  构造函数，初始化需要的state
+
+componentWillMount	  控件渲染前触发
+
+render			  渲染控件的方法
+
+componentDidMount	  控件渲染后触发
+
+componentWillReceiveProps 组件接收到新的props时被调用
+
+shouldComponentUpdate	  当组件接收到新的props和state时被调用
+
+componentWillUpdate	  props或者state改变，并且此前的shouldComponentUpdate方法返回为true会调用该方法
+
+componentDidUpdate	  组件重新渲染完成后会调用此方法
+
+componentWillUnmount	  组件卸载和销毁之前被调用
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
