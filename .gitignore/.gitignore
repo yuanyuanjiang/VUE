@@ -2,6 +2,30 @@
 !.babelrc
 !.gitignore
 
+# Product
+target
+*.class
+*.jar
+*.war
+*.[oa]
+*.so
+*.dylib
+*.luac
+*.pyc
+*.log
+
+# Develop Software
+*.iml
+rebel.xml
+.*.swp
+tags
+
+# VCS
+.svn
+.git
+.hg
+CVS
+
 # macOs
 .DS_Store
 Icon
